@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sweet Potato Germplasm Request Evolution Flowchart</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; padding: 30px; color: #1a202c; }
+  h1 { text-align: center; font-size: 1.6em; margin-bottom: 6px; color: #2d3748; }
+  .subtitle { text-align: center; font-size: 0.95em; color: #718096; margin-bottom: 30px; }
+  .timeline { position: relative; max-width: 900px; margin: 0 auto; }
+  .timeline::before { content: ''; position: absolute; left: 50%; width: 4px; background: #cbd5e0; top: 0; bottom: 0; transform: translateX(-50%); }
+  .event { position: relative; width: 50%; padding: 10px 30px; }
+  .event.left { left: 0; text-align: right; }
+  .event.right { left: 50%; text-align: left; }
+  .event::after { content: ''; position: absolute; width: 16px; height: 16px; border-radius: 50%; top: 18px; z-index: 1; }
+  .event.left::after { right: -8px; }
+  .event.right::after { left: -8px; }
+  .event.request::after { background: #3182ce; border: 3px solid #bee3f8; }
+  .event.change::after { background: #e53e3e; border: 3px solid #fed7d7; }
+  .event.response::after { background: #38a169; border: 3px solid #c6f6d5; }
+  .event.clarify::after { background: #d69e2e; border: 3px solid #fefcbf; }
+  .event.final::after { background: #805ad5; border: 3px solid #e9d8fd; }
+  .card { background: white; border-radius: 10px; padding: 14px 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: inline-block; text-align: left; max-width: 380px; }
+  .event.left .card { float: right; }
+  .event.right .card { float: left; }
+  .card .date { font-size: 0.75em; color: #a0aec0; font-weight: 600; margin-bottom: 4px; }
+  .card .label { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; padding: 2px 8px; border-radius: 4px; display: inline-block; }
+  .card .label.req { background: #bee3f8; color: #2b6cb0; }
+  .card .label.chg { background: #fed7d7; color: #c53030; }
+  .card .label.res { background: #c6f6d5; color: #276749; }
+  .card .label.cla { background: #fefcbf; color: #975a16; }
+  .card .label.fin { background: #e9d8fd; color: #553c9a; }
+  .card h3 { font-size: 0.9em; margin-bottom: 4px; color: #2d3748; }
+  .card p { font-size: 0.82em; color: #4a5568; line-height: 1.45; }
+  .card .detail { font-size: 0.78em; color: #718096; margin-top: 5px; font-style: italic; }
+  .legend { max-width: 900px; margin: 30px auto 20px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.82em; }
+  .legend-dot { width: 14px; height: 14px; border-radius: 50%; }
+  .legend-dot.req { background: #3182ce; }
+  .legend-dot.chg { background: #e53e3e; }
+  .legend-dot.res { background: #38a169; }
+  .legend-dot.cla { background: #d69e2e; }
+  .legend-dot.fin { background: #805ad5; }
+  .summary { max-width: 900px; margin: 30px auto; background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+  .summary h2 { font-size: 1.15em; margin-bottom: 12px; color: #2d3748; }
+  .summary ul { margin-left: 20px; }
+  .summary li { font-size: 0.88em; color: #4a5568; margin-bottom: 6px; line-height: 1.45; }
+  .stat-row { display: flex; gap: 16px; flex-wrap: wrap; max-width: 900px; margin: 20px auto; }
+  .stat { flex: 1; min-width: 140px; background: white; border-radius: 10px; padding: 16px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .stat .num { font-size: 2em; font-weight: 700; color: #3182ce; }
+  .stat .lbl { font-size: 0.78em; color: #718096; margin-top: 4px; }
+  .clear { clear: both; }
+</style>
+</head>
+<body>
+
+<h1>Sweet Potato Germplasm Request: Evolution of Requirements</h1>
+<p class="subtitle">How a single germplasm acquisition request evolved over 7 months through 36+ emails &mdash; a case study illustrating the complexity that AI-assisted acquisition aims to solve.</p>
+
+<div class="stat-row">
+  <div class="stat"><div class="num">7</div><div class="lbl">Months Duration</div></div>
+  <div class="stat"><div class="num">36+</div><div class="lbl">Emails Exchanged</div></div>
+  <div class="stat"><div class="num">7</div><div class="lbl">People Involved</div></div>
+  <div class="stat"><div class="num">6+</div><div class="lbl">Major Scope Changes</div></div>
+  <div class="stat"><div class="num">3</div><div class="lbl">Separate Subject Lines</div></div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot req"></div> Initial Request</div>
+  <div class="legend-item"><div class="legend-dot res"></div> Response / Availability Info</div>
+  <div class="legend-item"><div class="legend-dot chg"></div> Scope Change / Unavailability</div>
+  <div class="legend-item"><div class="legend-dot cla"></div> Clarification Needed</div>
+  <div class="legend-item"><div class="legend-dot fin"></div> Final Outcome</div>
+</div>
+
+<div class="timeline">
+
+  <!-- 1 -->
+  <div class="event left request">
+    <div class="card">
+      <div class="date">Sep 21, 2021</div>
+      <span class="label req">Initial Request</span>
+      <h3>Coordinator inquires about costs &amp; timeline</h3>
+      <p>Asks genebank about ~20 sweet potato in-vitro accessions for [Country X]. Gets quote: 6-8 weeks, $507 total.</p>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 2 -->
+  <div class="event right request">
+    <div class="card">
+      <div class="date">Oct 6, 2021</div>
+      <span class="label req">Initial Request</span>
+      <h3>Requester asks for 20 in-vitro materials</h3>
+      <p><strong>10</strong> white/yellow (low Brix &le;5)<br>
+      <strong>5</strong> orange (Brix 8-10)<br>
+      <strong>5</strong> purple (Brix &gt;10)</p>
+      <div class="detail">Also wants botanical seed for white, orange, AND purple.</div>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="event left response">
+    <div class="card">
+      <div class="date">Oct 14, 2021</div>
+      <span class="label res">Response</span>
+      <h3>Coordinator sends OFSP seed list</h3>
+      <p>Only orange-fleshed (OFSP) population list available (from a previous shipment to [Country Y]). Copies Breeder for quantity info.</p>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 4 -->
+  <div class="event right request">
+    <div class="card">
+      <div class="date">Oct 15, 2021</div>
+      <span class="label req">Request</span>
+      <h3>Requester still wants white, yellow &amp; purple seed</h3>
+      <p>Asks if white, yellow, and purple accessions can be nominated as botanical seed.</p>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 5 -->
+  <div class="event left change">
+    <div class="card">
+      <div class="date">Oct 19, 2021</div>
+      <span class="label chg">Scope Change #1</span>
+      <h3>No WHITE botanical seed available</h3>
+      <p>Breeders confirm: <strong>no white seed populations exist</strong>. In-vitro white IS available. Purple seed not until 2022.</p>
+      <div class="detail">Botanical seed narrowed to ORANGE ONLY.</div>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 6 -->
+  <div class="event right change">
+    <div class="card">
+      <div class="date">Oct 19, 2021</div>
+      <span class="label chg">Scope Change #2</span>
+      <h3>No PURPLE botanical seed available yet</h3>
+      <p>Purple seed scheduled for 2022. Requester accepts: botanical seed = orange only; in-vitro = orange + white.</p>
+      <div class="detail">Purple botanical seed dropped entirely.</div>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 7 -->
+  <div class="event left response">
+    <div class="card">
+      <div class="date">Oct 20, 2021</div>
+      <span class="label res">Response</span>
+      <h3>Coordinator sends in-vitro suggestions + involves Curator</h3>
+      <p>Suggested list attached. Copies Curator for purple in-vitro options from genebank collection. Explains formal order process required.</p>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 8 -->
+  <div class="event right clarify">
+    <div class="card">
+      <div class="date">Oct 20, 2021</div>
+      <span class="label cla">Clarification</span>
+      <h3>Requester asks about invoicing &amp; payment</h3>
+      <p>Wants commercial invoice for import process. Asks when to pay and when materials will be ready.</p>
+      <div class="detail">Coordinator redirects to formal genebank platform ordering.</div>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 9 -->
+  <div class="event left response">
+    <div class="card">
+      <div class="date">Oct 22, 2021</div>
+      <span class="label res">Response</span>
+      <h3>Curator provides 5 purple accessions (in-vitro)</h3>
+      <p>5 purple sweet potato accessions available for international in-vitro distribution from genebank collection.</p>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 10 -->
+  <div class="event right clarify">
+    <div class="card">
+      <div class="date">Oct 23, 2021</div>
+      <span class="label cla">Clarification</span>
+      <h3>Requester asks: &ldquo;Are these for in-vitro?&rdquo;</h3>
+      <p>Asks if the 5 purple accessions are clones for in-vitro distribution. Curator confirms yes.</p>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 11 -->
+  <div class="event left change">
+    <div class="card">
+      <div class="date">Oct 23, 2021</div>
+      <span class="label chg">Scope Change #3</span>
+      <h3>In-vitro total grows from 20 &rarr; 30</h3>
+      <p>With purple additions, the total in-vitro count now reaches <strong>30 materials</strong>. Requester asks: can we do 30, or must we stay at 20?</p>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 12 -->
+  <div class="event right response">
+    <div class="card">
+      <div class="date">Oct 25, 2021</div>
+      <span class="label res">Response</span>
+      <h3>Limit confirmed: up to 35 accessions OK</h3>
+      <p>Genebank Manager confirms max 35 accessions. Coordinator relays to Requester.</p>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 13 -->
+  <div class="event left clarify">
+    <div class="card">
+      <div class="date">Oct 26, 2021</div>
+      <span class="label cla">Clarification</span>
+      <h3>Requester confused by platform</h3>
+      <p>Asks: &ldquo;What ID do I enter on the genebank platform for botanical seed populations?&rdquo; Coordinator suggests verifying order was registered.</p>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 14 -->
+  <div class="event right request">
+    <div class="card">
+      <div class="date">Nov 11, 2021</div>
+      <span class="label req">New Handoff</span>
+      <h3>Requester A hands off to Requester B</h3>
+      <p>Introduces colleague to handle import process. Attaches lists of botanical seed AND in-vitro materials. Asks Coordinator to validate.</p>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 15 -->
+  <div class="event left clarify">
+    <div class="card">
+      <div class="date">Nov 16, 2021</div>
+      <span class="label cla">Clarification</span>
+      <h3>Coordinator reviews lists &mdash; questions arise</h3>
+      <p>Notices <strong>I. setosa</strong> and <strong>I. nil</strong> in spreadsheet. Asks: are you doing plant breeding? Need to induce flowering? Need virus control? Also asks: how many seeds? Have you ordered via the system yet?</p>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 16 -->
+  <div class="event right change">
+    <div class="card">
+      <div class="date">Nov 16, 2021</div>
+      <span class="label chg">Scope Change #4</span>
+      <h3>I. setosa &amp; I. nil DROPPED</h3>
+      <p>Requester B (after consulting Requester A): &ldquo;No plant breeding planned for now. The original file included I. setosa and I. nil, but NOT for now.&rdquo;</p>
+      <div class="detail">Want 100 botanical seeds per orange population. Will proceed with system order.</div>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 17 -->
+  <div class="event left response">
+    <div class="card">
+      <div class="date">Nov 18, 2021</div>
+      <span class="label res">Response</span>
+      <h3>Breeder confirms 100 seeds available</h3>
+      <p>Breeder (delayed by fieldwork) confirms seed quantity available. Asks to be told when to prepare and ship to headquarters.</p>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 18 -->
+  <div class="event right clarify">
+    <div class="card">
+      <div class="date">Nov 19, 2021</div>
+      <span class="label cla">Clarification</span>
+      <h3>Requester B asks about import procedure</h3>
+      <p>&ldquo;Do we need to follow a particular procedure?&rdquo; Coordinator explains: need import permit, DHL shipping, physical address required, wait for genebank to tell you when to get the permit.</p>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 19 -->
+  <div class="event left response">
+    <div class="card">
+      <div class="date">Dec 6, 2021</div>
+      <span class="label res">Response</span>
+      <h3>Final material list confirmed</h3>
+      <p>Requester B sends confirmed list of materials. Import permits being prepared.</p>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 20 -->
+  <div class="event right final">
+    <div class="card">
+      <div class="date">Apr 1, 2022</div>
+      <span class="label fin">Final Outcome</span>
+      <h3>Import permits received &mdash; materials being prepared</h3>
+      <p>In-vitro materials ready for inspection next week. Genebank Manager asks Breeder to send 15 seed accessions (200 seeds each).</p>
+    </div><div class="clear"></div>
+  </div>
+
+  <!-- 21 -->
+  <div class="event left change">
+    <div class="card">
+      <div class="date">Apr 2, 2022</div>
+      <span class="label chg">Scope Change #5</span>
+      <h3>Only 11 of 15 seed families available</h3>
+      <p>Breeder reports: <strong>4 families are missing</strong>. Can only send 11 of 15 requested botanical seed families.</p>
+      <div class="detail">Another last-minute reduction in what the requester will actually receive.</div>
+    </div><div class="clear"></div>
+  </div>
+
+</div>
+
+<div class="summary">
+  <h2>Summary of Request Evolution</h2>
+  <ul>
+    <li><strong>Original Request (Oct 6):</strong> 20 in-vitro accessions (10 white/yellow, 5 orange, 5 purple) + botanical seed in all three colors.</li>
+    <li><strong>Change #1 (Oct 19):</strong> No white botanical seed exists &rarr; dropped from seed request.</li>
+    <li><strong>Change #2 (Oct 19):</strong> No purple botanical seed until 2022 &rarr; dropped from seed request. Botanical seed narrowed to orange only.</li>
+    <li><strong>Change #3 (Oct 23):</strong> In-vitro total increased from 20 to 30 accessions (adding purple in-vitro from curator). Confirmed max allowed is 35.</li>
+    <li><strong>Change #4 (Nov 16):</strong> I. setosa and I. nil (wild species for breeding) were in the spreadsheet but dropped &mdash; no breeding planned for now.</li>
+    <li><strong>Change #5 (Apr 2):</strong> Only 11 of 15 botanical seed families available (4 missing) &mdash; final reduction at shipment time.</li>
+    <li><strong>Recurring issues:</strong> Requester didn&rsquo;t know how to use the ordering platform, asked about IDs. Handoff to a new person (Requester B) required re-explanation. Multiple clarification rounds about what material types were available vs. desired. Invoice/payment process confusion.</li>
+  </ul>
+</div>
+
+<div class="summary" style="border-left: 4px solid #e53e3e;">
+  <h2>Why This Matters for AI-Assisted Germplasm Acquisition</h2>
+  <ul>
+    <li><strong>7 months</strong> from first inquiry to materials being ready &mdash; much of that time spent on back-and-forth clarification.</li>
+    <li>The requester&rsquo;s original specifications (color, Brix levels, material type) did not match what was actually available, requiring multiple rounds of adjustment.</li>
+    <li>An AI system could have immediately cross-referenced the request against available inventory and presented realistic options upfront.</li>
+    <li>The curator, breeder, genebank manager, and coordinator all had to be manually looped in at different stages. An AI system could orchestrate these workflows automatically.</li>
+    <li>Platform confusion and procedural questions consumed significant email volume. An AI-guided interface could eliminate this entirely.</li>
+    <li>Even at the final stage, 4 of 15 seed families were unavailable &mdash; something that could have been flagged earlier with real-time inventory checking.</li>
+  </ul>
+</div>
+
+</body>
+</html>
